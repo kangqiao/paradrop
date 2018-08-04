@@ -3,28 +3,27 @@ package com.zp.paradrop
 import com.fasterxml.jackson.databind.JsonMappingException
 import com.fasterxml.jackson.core.JsonParseException
 import com.zp.paradrop.util.ZLog
-import sun.jvm.hotspot.HelloWorld.e
 import java.io.*
 import java.nio.charset.Charset
 
 
-fun main(vararg args: String){
+fun main(args: Array<String>){
     println("hello zhaopan")
+    sendRedEnvelopeFromCmd(args)
 }
 
 const val TAG = "Main"
 
 private fun sendRedEnvelopeFromCmd(args: Array<String>?) {
-    var configPath = ""
     if (null == args || args.size <= 0) {
         ZLog.e(TAG, "请指定配置文件")
         return
     }
-    configPath = args[0]
-    var `in`: InputStream? = null
+    var configPath = args[0]
+    var instream: InputStream? = null
     try {
-        `in` = FileInputStream(configPath)
-        val reader = InputStreamReader(`in`, Charset.forName("UTF-8"))
+        instream = FileInputStream(configPath)
+        val reader = InputStreamReader(instream, Charset.forName("UTF-8"))
         TransferManager(reader).sendRedEnvelope()
     } catch (e: FileNotFoundException) {
         ZLog.e(TAG, "找不到配置文件:$configPath")
@@ -34,7 +33,7 @@ private fun sendRedEnvelopeFromCmd(args: Array<String>?) {
         e.printStackTrace()
     } finally {
         try {
-            `in`!!.close()
+            instream!!.close()
         } catch (e: IOException) {
             e.printStackTrace()
         }

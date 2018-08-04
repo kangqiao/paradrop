@@ -6,10 +6,9 @@ import java.math.BigInteger
 import java.util.List
 
 
-data class Config @JvmOverloads constructor(var coin: String,
+data class Config @JvmOverloads constructor(var coin: String = "",
                                             var contractAddress: String = "",
-                                            var mnemonic: String,
-                                            var sendAddress: String,
+                                            var mnemonic: String = "",
                                             var commonNums: Double = 0.0,
                                             var commonUnit: String = "gwei",
                                             var commonGasPrice: Long = 0L,
