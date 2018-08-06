@@ -23,3 +23,5 @@ out/
 *.json
 *.txt
 *.log
+#*.xls
+#*.xlsx
